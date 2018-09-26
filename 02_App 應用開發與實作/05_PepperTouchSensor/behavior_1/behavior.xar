@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?><ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3"><Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0"><bitmap>media/images/box/root.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="Tactile L.Hand" id="1" localization="8" tooltip="Detect touch on left hand tactile sensor." x="312" y="234"><bitmap>media/images/box/movement/move_leftarm.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+            self.onStopped() #~ activate output of the box
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Input name="HLLeftTouched" type="0" type_size="1" nature="4" stm_value_name="HandLeftLeftTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" /><Input name="HLBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandLeftBackTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="5" /><Input name="HLRightTouched" type="0" type_size="1" nature="4" stm_value_name="HandLeftRightTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="6" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="7" /><Output name="leftTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The left of the left hand was touched." id="8" /><Output name="backTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The back of the left hand was touched." id="9" /><Output name="rightTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The right of the left hand was touched." id="10" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="if &gt; 0" id="1" localization="8" tooltip="Transmit only if value is &gt; 0." x="171" y="142"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="if &gt; 0" id="2" localization="8" tooltip="Transmit only if value is &gt; 0." x="171" y="39"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="if &gt; 0" id="3" localization="8" tooltip="Transmit only if value is &gt; 0." x="171" y="246"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="5" /><Link inputowner="0" indexofinput="9" outputowner="1" indexofoutput="4" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="4" /><Link inputowner="0" indexofinput="8" outputowner="2" indexofoutput="4" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="6" /><Link inputowner="0" indexofinput="10" outputowner="3" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline><Resource name="Left arm-sequence" type="Lock" timeout="0" /></Box><Box name="Tactile Head" id="2" localization="8" tooltip="Detect touch on head tactile sensor." x="312" y="88"><bitmap>media/images/box/sensors/tactileHead.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+            self.onStopped() #~ activate output of the box
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Input name="FrontTactilTouched" type="0" type_size="1" nature="4" stm_value_name="FrontTactilTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" /><Input name="MiddleTactilTouched" type="0" type_size="1" nature="4" stm_value_name="MiddleTactilTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="5" /><Input name="RearTactilTouched" type="0" type_size="1" nature="4" stm_value_name="RearTactilTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="6" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="7" /><Output name="frontTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The front tactile head sensor was touched." id="8" /><Output name="middleTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The middle tactile head sensor was touched." id="9" /><Output name="rearTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The rear tactile head sensor was touched." id="10" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="If &gt; 0" id="1" localization="8" tooltip="Transmit only if value is &gt; 0." x="260" y="17"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="If &gt; 0" id="2" localization="8" tooltip="Transmit only if value is &gt; 0." x="256" y="119"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="If &gt; 0" id="3" localization="8" tooltip="Transmit only if value is &gt; 0." x="261" y="223"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="4" /><Link inputowner="0" indexofinput="8" outputowner="1" indexofoutput="4" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="5" /><Link inputowner="0" indexofinput="9" outputowner="2" indexofoutput="4" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="6" /><Link inputowner="0" indexofinput="10" outputowner="3" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline><Resource name="Head-sequence" type="Lock" timeout="0" /></Box><Box name="Tactile R.Hand" id="3" localization="8" tooltip="Detect touch on right hand tactile sensor." x="316" y="412"><bitmap>media/images/box/movement/move_arm.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+            self.onStopped() #~ activate output of the box
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Input name="HRLeftTouched" type="0" type_size="1" nature="4" stm_value_name="HandRightLeftTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="4" /><Input name="HRBackTouched" type="0" type_size="1" nature="4" stm_value_name="HandRightBackTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="5" /><Input name="HRRightTouched" type="0" type_size="1" nature="4" stm_value_name="HandRightRightTouched" inner="1" tooltip="Connected to ALMemory. Will be stimulated every time the value subscribed to changes, respecting the refresh period." id="6" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is stopped." id="7" /><Output name="leftTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The left of the right hand was touched." id="8" /><Output name="backTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The back of the right hand was touched." id="9" /><Output name="rightTouched" type="1" type_size="1" nature="2" inner="0" tooltip="The right of the right hand was touched." id="10" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="if &gt; 0" id="1" localization="8" tooltip="Transmit only if value is &gt; 0." x="157" y="130"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="if &gt; 0" id="2" localization="8" tooltip="Transmit only if value is &gt; 0." x="157" y="28"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="if &gt; 0" id="3" localization="8" tooltip="Transmit only if value is &gt; 0." x="157" y="232"><bitmap>media/images/box/box-diagram.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_onStart(self, p):
+        if(p > 0):
+            self.onStopped() #~ activate output of the box
+        pass
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is usually a good idea to call onUnload of this box in a onStop method, as the code written in onUnload is used to finish the working of the box as well
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="5" /><Link inputowner="0" indexofinput="9" outputowner="1" indexofoutput="4" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="4" /><Link inputowner="0" indexofinput="8" outputowner="2" indexofoutput="4" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="6" /><Link inputowner="0" indexofinput="10" outputowner="3" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline><Resource name="Right arm-sequence" type="Lock" timeout="0" /></Box><Box name="Tablet Touch" id="10" localization="8" tooltip="Sends an event when the tablet is touched&#x0A;&#x0A;V1.0.1&#x0A;" x="322" y="562"><bitmap>media/images/box/sensors/STM.png</bitmap><script language="4"><content><![CDATA[
+
+class MyClass(GeneratedClass):
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.isRunning = False
+        self.tabletService = None
+        self.connectId = None
+
+    def onUnload(self):
+        if self.tabletService:
+            self.disconnectListener()
+            self.isRunning = False
+
+    def disconnectListener(self):
+        if self.connectId:
+            try:
+                self.tabletService.onTouch.disconnect(self.connectId)
+                self.connectId = None
+            except Exception as e:
+                self.logger.error(e)
+
+    def _getTabletService(self):
+        tabletService = None
+        try:
+            tabletService = self.session().service("ALTabletService")
+        except Exception as e:
+            self.logger.error(e)
+        return tabletService
+
+    def  onInput_onStart(self):
+        if self.isRunning:
+            return # already running, nothing to do
+        self.isRunning = True
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        self.tabletService = self._getTabletService()
+        if self.tabletService:
+            try:
+                if not self.connectId:
+                    if self.getParameter("Action") == "On touch move":
+                        self.connectId = self.tabletService.onTouchMove.connect(self.touchCallback)
+                    elif self.getParameter("Action") == "On touch down":
+                        self.connectId = self.tabletService.onTouchDown.connect(self.touchCallback)
+                    elif self.getParameter("Action") == "On touch up":
+                        self.connectId = self.tabletService.onTouchUp.connect(self.touchCallback)
+            except Exception as err:
+                self.logger.warning("Error during subscribe: %s " % err)
+        else:
+            self.logger.info("No ALTabletService, can't play listen for touch.")
+
+    def touchCallback(self, x, y):
+        self.onTouched([x, y])
+
+    def onInput_onStop(self):
+        self.onUnload()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onTouched" type="0" type_size="1" nature="2" inner="0" tooltip="Send [x,y] position for one touch" id="4" /><Parameter name="Action" inherits_from_parent="0" content_type="3" value="On touch up" default_value="On touch move" custom_choice="0" tooltip="Type of touch you want on the tablet." id="5"><Choice value="On touch move" /><Choice value="On touch down" /><Choice value="On touch up" /></Parameter></Box><Box name="Text Edit" id="4" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="530" y="66"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Front Head")]]></content></script><pluginContent><text><![CDATA[Front Head]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Text Edit (1)" id="5" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="542" y="177"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("middle Head")]]></content></script><pluginContent><text><![CDATA[middle Head]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Text Edit (2)" id="6" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="553" y="287"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("rear Head")]]></content></script><pluginContent><text><![CDATA[rear Head]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Text Edit (3)" id="7" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="547" y="412"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Left Hand")]]></content></script><pluginContent><text><![CDATA[Left Hand]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Text Edit (4)" id="8" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="560" y="530"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Right Hand")]]></content></script><pluginContent><text><![CDATA[Right Hand]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Text Edit (5)" id="9" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="543" y="672"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Tablet")]]></content></script><pluginContent><text><![CDATA[Tablet]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Log" id="11" localization="8" tooltip="Prompt the message in the debug window. You can set a prefix and a priority&#x0A;for the message in the parameters." x="985" y="342"><bitmap>media/images/box/print.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        #~ puts code for box cleanup here
+        pass
+
+    def onInput_message(self, p):
+        sPriority = self.getParameter("Priority")
+        sMessage = self.getParameter("Message prefix")
+        if( sMessage != "" and p != None ):
+            sMessage += ": "
+        if( p != None ):
+            sMessage += str(p)
+        if( sPriority == "Fatal" ):
+            self.logger.fatal( sMessage )
+        elif( sPriority == "Error" ):
+            self.logger.error( sMessage )
+        elif( sPriority == "Warning" ):
+            self.logger.warning( sMessage )
+        elif( sPriority == "Info" ):
+            self.logger.info( sMessage )
+        elif( sPriority == "Debug" ):
+            self.logger.debug( sMessage )
+        self.onDone()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="message" type="0" type_size="1" nature="1" inner="0" tooltip='The message to print or a &quot;Bang&quot; to only print the message set as parameter.' id="2" /><Output name="onDone" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" /><Parameter name="Message prefix" inherits_from_parent="0" content_type="3" value="Message text" default_value="Message text" custom_choice="0" tooltip="Enter the text you want to print before the input message." id="4" /><Parameter name="Priority" inherits_from_parent="0" content_type="3" value="Info" default_value="Info" custom_choice="0" tooltip="Enter the priority of your message. If you select error, the box will get red when it will be stimulated." id="5"><Choice value="Fatal" /><Choice value="Error" /><Choice value="Warning" /><Choice value="Info" /><Choice value="Debug" /></Parameter></Box><Link inputowner="11" indexofinput="2" outputowner="4" indexofoutput="3" /><Link inputowner="11" indexofinput="2" outputowner="5" indexofoutput="3" /><Link inputowner="11" indexofinput="2" outputowner="6" indexofoutput="3" /><Link inputowner="11" indexofinput="2" outputowner="7" indexofoutput="3" /><Link inputowner="11" indexofinput="2" outputowner="8" indexofoutput="3" /><Link inputowner="11" indexofinput="2" outputowner="9" indexofoutput="3" /><Link inputowner="4" indexofinput="2" outputowner="2" indexofoutput="8" /><Link inputowner="5" indexofinput="2" outputowner="2" indexofoutput="9" /><Link inputowner="6" indexofinput="2" outputowner="2" indexofoutput="10" /><Link inputowner="7" indexofinput="2" outputowner="1" indexofoutput="9" /><Link inputowner="8" indexofinput="2" outputowner="3" indexofoutput="9" /><Link inputowner="9" indexofinput="2" outputowner="10" indexofoutput="4" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="10" indexofinput="2" outputowner="0" indexofoutput="2" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>
