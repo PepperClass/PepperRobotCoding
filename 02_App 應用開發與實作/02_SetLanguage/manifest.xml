@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.0" uuid="02_setlanguage-46c470">
+<package version="0.0.0" uuid="02_setlanguage">
  <names>
-  <name lang="en_US">Untitled</name>
+  <name lang="en_US">setLanguage</name>
  </names>
  <supportedLanguages>
   <language>en_US</language>
@@ -13,10 +13,11 @@
   <behaviorContent path="behavior_1">
    <userRequestable/>
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
-   <autonomous/>
    <permissions/>
   </behaviorContent>
  </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.5"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
 </package>
