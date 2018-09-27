@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>QiMessaging (監視)</title>
+    <script src="/libs/qimessaging/2/qimessaging.js"></script>
+	<script>
+        var session;
+        function startSubscribe() {
+		    QiSession(function(s){
+				session = s;
+
+				session.service("ALMemory").then(function (ALMemory) {
+					ALMemory.subscriber("ToTabletEvent").then(function(subscriber) {
+					    subscriber.signal.connect(toTabletHandler);
+					});
+				});
+		    });
+        }	
+
+        function toTabletHandler(value) {
+			document.getElementById("PersonID").innerHTML = value;
+
+			session.service("ALFaceCharacteristics").then(function (MyALFaceCharacteristics) {
+
+				MyALFaceCharacteristics.analyzeFaceCharacteristics(value).then(function(){;
+
+					session.service("ALMemory").then(function (MyALMemory) {
+
+						document.getElementById("PersonShirtColor").innerHTML = "不明";
+						MyALMemory.getData("PeoplePerception/Person/"+value+"/ShirtColor").then(function(ShirtColor){
+						  document.getElementById("PersonShirtColor").innerHTML = ShirtColor;
+						});
+
+						document.getElementById("PersonGender").innerHTML = "不明";
+						MyALMemory.getData("PeoplePerception/Person/"+value+"/GenderProperties").then(function(GenderValue){
+							if (GenderValue[0] == 0){
+								document.getElementById("PersonGender").innerHTML = "女生";
+							}else{
+								document.getElementById("PersonGender").innerHTML = "男生";
+							}
+						});
+
+						document.getElementById("PersonAge").innerHTML = "不明";
+						MyALMemory.getData("PeoplePerception/Person/"+value+"/AgeProperties").then(function(AgeProperties){
+							document.getElementById("PersonAge").innerHTML = AgeProperties[0];
+						});
+					});
+				});
+			});
+
+        }
+
+	</script>
+
+  </head>
+  <body onLoad="startSubscribe();">
+    <div style="font-size: 4em">
+      人員監視
+    </div>
+    <div style="font-size: 2em">
+      (ID): <span id="PersonID">不明</span><BR>
+	  (性別): <span id="PersonGender">不明</span><BR>
+	  (年齡): <span id="PersonAge">不明</span><BR>
+	  (衣服顏色): <span id="PersonShirtColor">不明</span><BR>
+    </div>
+  </body>
+</html>
