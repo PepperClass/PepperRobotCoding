@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?><ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3"><Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0"><bitmap>media/images/box/root.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="Dialog" id="3" localization="8" tooltip="An example of multilanguage dialog implementation" x="401" y="137"><dialogFile>ExampleDialog/ExampleDialog.dlg</dialogFile><bitmap>media/images/box/box-dialog.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Output name="playAGame" type="1" type_size="1" nature="2" inner="0" tooltip="stimulated using $playAGame=1 in qiChat script when User wants to play a game&#x0A;" id="5" /><Resource name="Speech" type="Lock" timeout="0" /><Resource name="Speech recognition" type="Lock" timeout="0" /></Box><Box name="Set Language" id="2" localization="8" tooltip="Set the language of your robot for the current application. Your robot will speak and understand the selected language as long as your application has focus. Any following call to ALSpeechRecognition (Speech Reco. box for instance), ALTextToSpeech (Say box for instance) or ALDialog will use this language.&#x0A;" x="185" y="102"><bitmap>media/images/box/interaction/say.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        try:
+            self.tts = ALProxy("ALTextToSpeech")
+        except:
+            self.logger.warn("ALTextToSpeech is not available, language setting cannot be applied to speech")
+            self.tts = None
+
+        try:
+            self.asr = ALProxy("ALSpeechRecognition")
+        except:
+            self.logger.warn("ALSpeechRecognition is not available, language setting cannot be applied to recognition")
+            self.asr = None
+
+        try:
+            self.dialog = ALProxy("ALDialog")
+        except:
+            self.logger.warn("ALDialog is not available, language setting cannot be applied to dialog")
+            self.dialog = None
+
+    def onInput_onSet(self):
+        lang = self.getParameter("Language")
+        try:
+            if self.asr:
+                self.asr.setLanguage( self.getParameter("Language") )
+            if self.tts:
+                self.tts.setLanguage( self.getParameter("Language") )
+            if self.dialog:
+                self.dialog.setLanguage( self.getParameter("Language") )
+            if self.tts is None and self.asr is None and self.dialog is None:
+                raise RuntimeError("Cannot set language: neither ALTextToSpeech nor ALSpeechRecognition nor ALDialog is available.")
+            self.onReady()
+        except:
+            error = "Language " + lang + " cannot be set."
+            self.logger.warn(error)
+            self.onError(error)]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" /><Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" /><Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="Error output:&#x0A;- triggered if the language asked cannot be set" id="4" /><Parameter name="Language" inherits_from_parent="0" content_type="3" value="Chinese" default_value="English" custom_choice="1" tooltip="Set the language the robot speaks and understands." id="5"><Choice value="Arabic" /><Choice value="Brazilian" /><Choice value="Chinese" /><Choice value="Czech" /><Choice value="Danish" /><Choice value="Dutch" /><Choice value="English" /><Choice value="Finnish" /><Choice value="French" /><Choice value="German" /><Choice value="Greek" /><Choice value="Italian" /><Choice value="Japanese" /><Choice value="Korean" /><Choice value="MandarinTaiwan" /><Choice value="Norwegian" /><Choice value="Polish" /><Choice value="Portuguese" /><Choice value="Russian" /><Choice value="Spanish" /><Choice value="Swedish" /><Choice value="Turkish" /></Parameter><Resource name="Speech" type="Lock" timeout="0" /></Box><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="3" indexofinput="2" outputowner="2" indexofoutput="3" /><Link inputowner="0" indexofinput="4" outputowner="3" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>

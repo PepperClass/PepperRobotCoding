@@ -1,0 +1,8 @@
+topic: ~ExampleDialog()
+language: mnc
+
+u:(哈囉) \vct=130\\rspd=110\哈囉你好!
+u:(["你叫什麼{名字}" "你是誰" "你的名字是{什麼}"])\vct=130\\rspd=110\我的名字是Pepper，那你呢?
+    u1:([* !不知道]) 很高興認識你!
+    u1:(不知道) 你騙人! \pau=500\請問你的名字是? ^stayInScope
+u:(_[拜拜 掰掰 再見]) \vct=130\\rspd=110\好的， $1 囉 $onStopped=1
