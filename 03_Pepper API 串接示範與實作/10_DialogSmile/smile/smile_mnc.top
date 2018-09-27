@@ -1,0 +1,24 @@
+topic: ~smile()
+language: mnc
+
+concept:(yes) [好 好啊 好喔 來吧 OK 沒問題 "開始{吧}"]
+concept:(no) [不好 不要 不想]
+
+u: (e:onStart) \vct=130\\rspd=110\嗨，讓我們來做笑容測試！
+    u1: (~yes) \vct=130\\rspd=110\
+    ^start(animations/Stand/Gestures/ShowSky_5)
+    好喔
+    ^wait(animations/Stand/Gestures/ShowSky_5)
+    請看着我，並對着我笑！
+    $checkSmile=1
+    u1: (~no) \vct=130\\rspd=110\好吧，那我們下次再玩
+    u1:(e:Dialog/NotUnderstood) ^gotoReactivate(Cans) ^stayInScope
+    u1:(e:Dialog/NotSpeaking10) ^gotoRandom(timeout) ^stayInScope
+    u1:(e:Dialog/NotSpeaking20) \vct=130\\rspd=110\掰掰 $onStopped=1
+
+proposal: %Cans \vct=130\\rspd=110\再說一次好嘛
+proposal: %timeout \vct=130\\rspd=110\你還在嗎?
+proposal: %timeout \vct=140\\rspd=100\人呢！
+proposal: %timeout \vct=130\\rspd=110\不要不理Pepper阿
+
+
