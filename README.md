@@ -5,3 +5,10 @@
 敬請期待~
 
 有任何的問題，請於Issue提問喔，謝謝~
+
+
+Thank you for participating in Pepper's skill development. I believe that after you have developed Pepper's Choregraphe Python and Android programs, you should have a feeling of getting back. In addition to developing pure UI graphics software, you also want to develop hardware control and Interactive program, it will be much more interesting
+
+A complete sample program for the teaching materials of Pepper Coding Using Google API and Azure API will be announced.
+
+If you have any questions, please ask questions in Issue, thank you~
