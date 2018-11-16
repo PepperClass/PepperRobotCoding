@@ -12,3 +12,14 @@ Thank you for participating in Pepper's skill development. I believe that after 
 A complete sample program for the teaching materials of Pepper Coding Using Google API and Azure API will be announced.
 
 If you have any questions, please ask questions in Issue, thank you~
+
+
+
+
+
+Pepper Partner Program（Pepper開發者計劃）是結合機器人商務與開發的綜合性計畫，培養開發商進入機器人開發領域，沛博科技為台灣區開發者推出一系列支援方案方案，包含教育訓練課程、商務媒合、技術支援等，讓台灣更多軟體開發人才加速進入機器人產業。
+
+如欲了解詳情，可至沛博科技官網 「開發者聯盟」相關頁面：
+http://bit.ly/2zrpEFD
+
+或來信至 developer@perobot.com.tw 詢問
