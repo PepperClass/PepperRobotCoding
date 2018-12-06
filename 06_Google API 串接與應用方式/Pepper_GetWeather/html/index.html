@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<Head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/libs/qimessaging/2/qimessaging.js"></script>
+<script>
+      var session;
+      QiSession( function (s) {
+        session = s;
+      });
+
+	function getData() {
+		var url = "http://api.openweathermap.org/data/2.5/weather?q=tainan,TW&appid=933fb925d18d02371b6d9e2b3fd8f018&lang=zh_tw";
+		$.getJSON( url, function( data ) {
+			 document.getElementById("demo").innerHTML = JSON.stringify(data);
+			 document.getElementById("myWether").value = data.weather[0].description;
+			 document.getElementById("myDegree").value = (data.main.temp-273.15).toFixed(2);
+			 
+			 session.service("ALTextToSpeech").then(function (tts) {
+          		tts.say('目前天氣' + document.getElementById("myWether").value + ',氣溫'+document.getElementById("myDegree").value+'度');
+        	  });
+		});
+	};
+</script>
+</Head>
+<body>
+<button onclick="getData()">取得最新消息</button>
+
+<p id="demo"></p>
+<H1>天氣: <input type="text" id="myWether" value=""></H1><BR>
+
+<H1>氣溫: <input type="text" id="myDegree" value=""></H1><BR>
+
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<Head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/libs/qimessaging/2/qimessaging.js"></script>
+<script>
+
+	
+	var session;
+	function startSubscribe() {
+		QiSession(function(s){
+			session = s;
+
+			session.service("ALMemory").then(function (ALMemory) {
+			ALMemory.subscriber("ToTabletEvent").then(function(subscriber) {
+				subscriber.signal.connect(toTabletHandler);
+				});
+			});
+		});
+	}
+	function toTabletHandler(image) {
+	  var data = {
+		requests :[
+		  {
+			image:{
+			  content: image
+			},
+			features:[
+			  {
+				type:"LABEL_DETECTION",
+				maxResults:5
+			  }
+			]
+		  }
+		]
+	  };
+	  $.ajax({
+		type: 'POST',
+		url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBfRlENp63QEjRGgM0w2IpLTNFig0c3JhI',
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		success: function(data) {
+		  document.getElementById('my_image').setAttribute(
+				'src', 'data:image/jpg;base64, ' + image
+			);
+		  $('#description').text(data.responses[0].labelAnnotations[0].description);
+		  $('#score').text(Math.trunc((data.responses[0].labelAnnotations[0].score * 100)) + "%");
+		  
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('我看到了' + data.responses[0].labelAnnotations[0].description);
+			});
+	  
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('我看到了' + data.responses[0].labelAnnotations[1].description);
+			});
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('我看到了' + data.responses[0].labelAnnotations[2].description);
+			});
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('我看到了' + data.responses[0].labelAnnotations[3].description);
+			});
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('我看到了' + data.responses[0].labelAnnotations[4].description);
+			});
+		}
+	  });
+	}
+</script>
+</Head>
+<body onLoad="startSubscribe()">
+<table style="width:100%">
+  <tr>
+    <th><img id='my_image' src="" alt="Take a Picture" /></th>
+    <th style="text-align:left;">
+		<H1>description: <div id="description"></div></H1><BR>
+		<H1>score: <div id="score"></div></H1><BR>
+	</th>
+  </tr>
+</table>
+ 
+
+
+</body>
+</html>

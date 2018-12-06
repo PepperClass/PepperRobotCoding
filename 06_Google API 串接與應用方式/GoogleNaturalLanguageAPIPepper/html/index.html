@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<Head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/libs/qimessaging/2/qimessaging.js"></script>
+<script>
+
+	
+	var session;
+	function startSubscribe() {
+		QiSession(function(s){
+			session = s;
+
+			session.service("ALMemory").then(function (ALMemory) {
+			ALMemory.subscriber("ToTabletEvent").then(function(subscriber) {
+				subscriber.signal.connect(toTabletHandler);
+				});
+			});
+		});
+	}
+
+	function toTabletHandler(text) {
+
+	  var data = {
+		"encodingType": "UTF8",
+		"document": {
+		  "type": "PLAIN_TEXT",
+		  "content": text,
+		  "language": 'zh-Hant'
+		}
+	  };
+	  $.ajax({
+		type: 'POST',
+		url: 'https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyBfRlENp63QEjRGgM0w2IpLTNFig0c3JhI',
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		success: function(data) {
+
+		
+		  var score = data.documentSentiment.score;
+		  var lang = data.language;
+
+		  $('#myText').text(text);
+		  $('#myScore').text(score.toString());
+		  if (score > 0) {
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('文字情緒分析為正向, 分數' + score.toString());
+			});
+		  } else if (score <= 0) {
+			session.service("ALTextToSpeech").then(function (tts) {
+				tts.say('文字情緒分析為負向, 分數' + score.toString());
+			});
+		  }
+
+		}
+	  })
+	};
+</script>
+</Head>
+
+<body onLoad="startSubscribe()">
+<table style="width:100%">
+  <tr>
+    <th style="text-align:left;">
+		<H1>文字內容: <div id="myText"></div></H1><BR>
+		<H1>分數: <div id="myScore"></div></H1><BR>
+	</th>
+  </tr>
+</table>
+
+</body>
+</html>

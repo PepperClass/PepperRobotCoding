@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<Head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/libs/qimessaging/2/qimessaging.js"></script>
+<script>
+
+	
+	var session;
+	function startSubscribe() {
+		QiSession(function(s){
+			session = s;
+
+			session.service("ALMemory").then(function (ALMemory) {
+			ALMemory.subscriber("ToTabletEvent").then(function(subscriber) {
+				subscriber.signal.connect(toTabletHandler);
+				});
+			});
+		});
+	}
+	function toTabletHandler(text) {
+
+	  var data = {
+	  'q': text,
+	  'source': 'zh',
+	'target': 'ja'
+	  };
+
+	  $.ajax({
+		type: 'POST',
+		url: 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBfRlENp63QEjRGgM0w2IpLTNFig0c3JhI',
+		data: JSON.stringify(data),
+		contentType: "application/json",
+
+		success: function(data) {
+		  var translatedText = data.data.translations[0].translatedText;
+
+		  $('#Chinese').text(text);
+		  $('#Japanese').text(translatedText);
+		  
+		    session.service("ALMemory").then(function (ALMemory) {
+				ALMemory.raiseEvent('Japanese_text', translatedText);
+			});
+
+		}
+	  })
+	}
+</script>
+</Head>
+
+<body onLoad="startSubscribe()">
+<table style="width:100%">
+  <tr>
+    <th style="text-align:left;">
+		<H1>中文: <div id="Chinese"></div></H1><BR>
+		<H1>日文: <div id="Japanese"></div></H1><BR>
+	</th>
+  </tr>
+</table>
+ 
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<Head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/libs/qimessaging/2/qimessaging.js"></script>
+<script>
+
+	
+	var session;
+	function startSubscribe() {
+		QiSession(function(s){
+			session = s;
+
+			session.service("ALMemory").then(function (ALMemory) {
+			ALMemory.subscriber("ToTabletEvent").then(function(subscriber) {
+				subscriber.signal.connect(toTabletHandler);
+				});
+			});
+		});
+	}	
+
+	function toTabletHandler(text) {
+
+		$('#WeatherToday').text(text);
+
+	}
+	
+
+</script>
+</Head>
+
+<body onLoad="startSubscribe()">
+<table style="width:100%">
+  <tr>
+    <th style="text-align:left;">
+		<H1>今天天氣: <div id="WeatherToday"></div></H1><BR>
+	</th>
+  </tr>
+</table>
+ 
+
+
+</body>
+</html>
