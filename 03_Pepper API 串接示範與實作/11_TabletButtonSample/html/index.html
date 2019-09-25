@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pepper 說話測試</title>
+    <script src="/libs/qimessaging/2/qimessaging.js"></script>
+    <script>
+      var session;
+      QiSession( function (s) {
+        session = s;
+      });
+
+      function MyButtonClicked() {
+        session.service("ALMemory").then(function (mem) {
+          mem.raiseEvent("buttonClickEvent","xxxSendValuexxx");
+        });
+      }
+
+    </script>
+  </head>
+  <body>
+    <button type="button" onclick="MyButtonClicked();">說話</button>
+  </body>
+</html>
