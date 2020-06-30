@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?><ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3"><Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0"><bitmap>media/images/box/root.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="Tablet wifi ssid" id="7" localization="8" tooltip="Send the text you entered when the input is stimulated." plugin="textedit_plugin" x="111" y="47"><bitmap>media/images/box/interaction/vocabulary.png</bitmap><script language="4"><content><![CDATA[# /!\ Generated content. Do not edit!
+class MyClass(GeneratedClass):
+	def __init__(self):
+		GeneratedClass.__init__(self)
+
+	def onInput_onStart(self):
+		self.onStopped("Garfield 的 iPhone8")]]></content></script><pluginContent><text><![CDATA[Garfield 的 iPhone8]]></text></pluginContent><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the text on the output." id="2" /><Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The text you entered." id="3" /></Box><Box name="Configure WiFi (1)" id="3" localization="8" tooltip="タブレットのWiFiの設定をおこないます。&#x0A;セキュリティタイプにWEP, WPAを指定した場合、タブレットによってパスワードの入力が求められます。" x="442" y="95"><bitmap>media/images/box/interaction/play_sound.png</bitmap><script language="4"><content><![CDATA[#disconnectWifi()
+
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.ssid = None
+        self.inputTextHandlerId = None
+
+    def onUnload(self):
+        self._removeHandlers()
+        tabletService = ''
+
+    def onInput_onStart(self, ssid):
+
+        tabletService = self.session().service("ALTabletService")
+        wifi_status = tabletService.getWifiStatus()
+
+        if wifi_status != "CONNECTED":
+
+            security = self.getParameter("Security")
+            if security == "open":
+                self._configureWifi(security, ssid, "")
+            else:
+                # Show input box for WiFi password
+                self.ssid = ssid
+                #self.logger.info("Waiting for WiFi password...")
+                tabletService = self.session().service("ALTabletService")
+                #self._configureWifi(self.getParameter("Security"), self.ssid, "eric1002")
+                if not self.inputTextHandlerId:
+                    self.inputTextHandlerId = tabletService.onInputText.connect(self.inputTextHandler)
+                tabletService.showInputDialog("密碼", "WiFi '%s' WIFI用密碼" % ssid, "OK", "Cancel")
+        else:
+            self.output_connected()
+
+
+    def onInput_disconnect_wifi(self):
+        tabletService = self.session().service("ALTabletService")
+        wifi_status = tabletService.getWifiStatus()
+
+        tabletService.disconnectWifi()
+        self.logger.info("wifi status:"+wifi_status)
+
+    def onInput_reset_tablet(self):
+        tabletService = self.session().service("ALTabletService")
+        tabletService.resetTablet()
+
+
+    def inputTextHandler(self, validation, input):
+        self._removeHandlers()
+        if validation == 1:
+            self._configureWifi(self.getParameter("Security"), self.ssid, input)
+            self.ssid = None
+        else:
+            self.onCanceled()
+
+    def _configureWifi(self, security, ssid, password):
+        tabletService = self.session().service("ALTabletService")
+        tabletService.enableWifi()
+        if tabletService.configureWifi(security, ssid, password):
+            self.logger.info("Configure successfully: %s" % ssid)
+            self.onFinished()
+        else:
+            self.logger.info("Configure failed: %s" % ssid)
+            self.onFailure()
+
+    def _removeHandlers(self):
+        tabletService = self.session().service("ALTabletService")
+        if self.inputTextHandlerId:
+            try:
+                tabletService.onInputText.disconnect(self.inputTextHandlerId)
+                self.inputTextHandlerId = None
+            except Exception as e:
+                self.logger.error(e)]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="WiFiの設定を開始します。&#x0A;接続先のSSIDを入力する必要があります。" id="2" /><Input name="disconnect_wifi" type="1" type_size="1" nature="1" inner="0" tooltip="" id="3" /><Input name="reset_tablet" type="1" type_size="1" nature="1" inner="0" tooltip="" id="4" /><Output name="onFinished" type="1" type_size="1" nature="1" inner="0" tooltip="WiFi設定が完了したことを示します。" id="5" /><Output name="onFailure" type="1" type_size="1" nature="1" inner="0" tooltip="WiFi設定に失敗したことを示します。" id="6" /><Output name="onCanceled" type="1" type_size="1" nature="1" inner="0" tooltip="WiFi設定がキャンセル(パスワード入力がキャンセル)されたことを示します。" id="7" /><Output name="output_connected" type="1" type_size="1" nature="2" inner="0" tooltip="" id="8" /><Parameter name="Security" inherits_from_parent="0" content_type="3" value="wpa" default_value="wep" custom_choice="0" tooltip="WiFiのセキュリティタイプを指定します。" id="9"><Choice value="wep" /><Choice value="wpa" /><Choice value="open" /></Parameter></Box><Box name="OpenTablet Setting" id="4" localization="8" tooltip="" x="126" y="195"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[class MyClass(GeneratedClass):
+    APP_ID = ".lastUploadedChoregrapheBehavior"
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        #self.onStopped() #activate the output of the box
+
+        self.tabletservice = self.session().service("ALTabletService")
+        self.tabletservice._openSettings()
+        self.onStopped()
+
+    def onApkInstalled(self, package):
+        self.logger.info("onApkInstalled package=" + package)
+        self.installstate = 2
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="Show Web View" id="8" localization="8" tooltip="Shows the webview (html content) on the tablet.&#x0A;&#x0A;V1.0.0&#x0A;" x="127" y="348"><bitmap>media/images/box/internet/internet.png</bitmap><script language="4"><content><![CDATA[
+
+class MyClass(GeneratedClass):
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def _getTabletService(self):
+        tabletService = None
+        try:
+            tabletService = self.session().service("ALTabletService")
+        except Exception as e:
+            self.logger.error(e)
+        return tabletService
+
+    def onInput_onStart(self):
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        if tabletService:
+            tabletService.showWebview('http://www.google.com')
+        else:
+            self.logger.warning("ALTabletService not found.")
+        self.onStopped()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" /></Box><Link inputowner="3" indexofinput="2" outputowner="7" indexofoutput="3" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>
