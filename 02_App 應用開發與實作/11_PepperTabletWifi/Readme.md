@@ -7,7 +7,7 @@
 ![image](https://github.com/PepperClass/PepperRobotCoding/blob/master/02_App%20%E6%87%89%E7%94%A8%E9%96%8B%E7%99%BC%E8%88%87%E5%AF%A6%E4%BD%9C/11_PepperTabletWifi/001.png)
 
 1. 功能(1): 開啟 Android 平板的設定畫面
-   1. 程式執行後, 會顯示如下畫面, 點擊 Wi-Fi 設定確認狀態或變更, 建議將不用的已記憶的 Wi-Fi 清除, 避免 Android 平板因 Wi-Fi 訊號不穩定而自行切換 Wi-Fi, 導致程式無法正常運行!
+   1. 程式執行後, 會顯示如下畫面, 點擊 Wi-Fi 設定確認狀態或變更, 建議將不用的已記憶的 Wi-Fi 清除, 避免 Android 平板因 Wi-Fi 訊號不穩定而自行切換 Wi-Fi, 導致程式無法正常運行!(***注意*** 請勿去變更Wi-Fi以外的其他設定, 以免導致Pepper運作異常, 超出或影響 Pepper 的保固範圍服務)
    
    ![image](https://github.com/PepperClass/PepperRobotCoding/blob/master/02_App%20%E6%87%89%E7%94%A8%E9%96%8B%E7%99%BC%E8%88%87%E5%AF%A6%E4%BD%9C/11_PepperTabletWifi/002.jpg)
    
