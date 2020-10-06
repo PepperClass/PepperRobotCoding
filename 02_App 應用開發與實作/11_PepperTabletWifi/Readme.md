@@ -1,4 +1,8 @@
 # Pepper Tablet Wi-Fi Setting
+
+#### 此程式僅限Pepper開發機使用，若其他機款(如商務機、家用機)使用，造成Pepper無法運行、故障，則屬人為損壞，不列入保固範圍內。
+#### This SW tool is limited to be used for the purpose of pepper development only. No warranty will be applied to damaged B2B or B2C pepper due to improper use or modification to any system setting via this SW tool. 
+
 # Pepper 開發 App,  Wi-Fi 設定常見問題
 * Pepper 胸前 Android 平板無法顯示內部或外部網頁 (Intranet / Internet)
 * 無法確認 Pepper 胸前 Android 平板連線的 Wi-Fi設定及連線狀態 (ps. 一般使用Boot-Config, 只能確認 Pepper 頭部 Naoqi Linux 系統的 Wi-Fi 連線狀態)
@@ -7,7 +11,7 @@
 ![image](https://github.com/PepperClass/PepperRobotCoding/blob/master/02_App%20%E6%87%89%E7%94%A8%E9%96%8B%E7%99%BC%E8%88%87%E5%AF%A6%E4%BD%9C/11_PepperTabletWifi/001.png)
 
 1. 功能(1): 開啟 Android 平板的設定畫面
-   1. 程式執行後, 會顯示如下畫面, 點擊 Wi-Fi 設定確認狀態或變更, 建議將不用的已記憶的 Wi-Fi 清除, 避免 Android 平板因 Wi-Fi 訊號不穩定而自行切換 Wi-Fi, 導致程式無法正常運行!(***注意*** 請勿去變更Wi-Fi以外的其他設定, 以免導致Pepper運作異常, 超出或影響 Pepper 的保固範圍服務)
+   1. 程式執行後, 會顯示如下畫面, 點擊 Wi-Fi 設定確認狀態或變更, 建議將不用的已記憶的 Wi-Fi 清除, 避免 Android 平板因 Wi-Fi 訊號不穩定而自行切換 Wi-Fi, 導致程式無法正常運行! (***注意***!!! 請勿去變更Wi-Fi以外的其他設定, 以免導致Pepper運作異常, 超出或影響 Pepper 的保固範圍服務)
    
    ![image](https://github.com/PepperClass/PepperRobotCoding/blob/master/02_App%20%E6%87%89%E7%94%A8%E9%96%8B%E7%99%BC%E8%88%87%E5%AF%A6%E4%BD%9C/11_PepperTabletWifi/002.jpg)
    
