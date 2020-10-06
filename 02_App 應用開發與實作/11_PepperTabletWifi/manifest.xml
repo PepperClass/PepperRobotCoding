@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.0" uuid="peppertabletwifi-f8a4fa">
+<package uuid="peppertabletwifi-f8a4fa" version="0.0.0">
  <names>
-  <name lang="en_US">Untitled</name>
+  <name lang="en_US">Pepper Tablet WiFi</name>
  </names>
  <supportedLanguages>
   <language>en_US</language>
